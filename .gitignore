@@ -1,0 +1,9 @@
+# npm
+node_modules/
+
+# Gatsby
+.cache/
+public
+
+# Vim
+.swp
