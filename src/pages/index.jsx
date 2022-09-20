@@ -1,33 +1,27 @@
 import { graphql } from 'gatsby';
 
-const mapToPosts = (data) => data
-  .allMarkdownRemark
-  .nodes
-  .map(({ id, frontmatter: { title, slug } }) => ({
-    id,
-    title,
-    path: slug,
-  }));
+import Posts from '../components/Posts';
 
 function IndexPage({ data }) {
   const posts = mapToPosts(data);
 
   return (
     <main>
-      <div>
-        <h2>글 목록</h2>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>
-              <a href={post.path}>
-                {post.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Posts posts={posts} />
     </main>
   );
+}
+
+function mapToPosts(data) {
+  return data
+    .allMarkdownRemark
+    .nodes
+    .map(({ id, frontmatter: { title, slug, date } }) => ({
+      id,
+      title,
+      path: slug,
+      date,
+    }));
 }
 
 export const query = graphql`
@@ -38,6 +32,7 @@ export const query = graphql`
         frontmatter {
           title
           slug
+          date
         }
       }
     }
