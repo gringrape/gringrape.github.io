@@ -1,6 +1,7 @@
 ---
 slug: "/blog/blog-setup"
 date: "2022-09-17"
+description: "자주 수정할 수 있는 지식저장소 만들기"
 title: "VimWiki + Gatsby 블로그 만들기"
 ---
 
@@ -140,15 +141,42 @@ https://www.gatsbyjs.com/docs/how-to/querying-data/page-query/
 - index 파일이 제외되도록 처리
 
 5. 목록 보기 - 작성 날짜 별로 정렬
-- 메타데이터(지금은 작성 날짜)가 작성시에 자동으로 기록되도록 처리.
+
+date 값을 비교해서 정렬한다.
 
 6. 메타데이터 입력 자동화
-https://johngrib.github.io/wiki/vimwiki/#vimscript-%EC%84%9C%ED%8F%AC%ED%8A%B8-%EC%BD%94%EB%93%9C
+- 메타데이터가 자동으로 입력되도록 하기. 
 - 메타데이터를 자동으로 작성하도록 설정.
+- 메타데이터(지금은 작성 날짜)가 작성시에 자동으로 기록되도록 하기.
 
-7. 랜덤 목록 보기
+6-1. Vimscript 배우기 - https://learnvimscriptthehardway.stevelosh.com/
 
-8. 상세 보기
+- calling function
+- expression function 
+
+6-2. URL을 얻기 위해 Vimscript 를 통해서 현재 경로 얻기
+https://vim.fandom.com/wiki/Get_the_name_of_the_current_file
+
+6-3. 글 작성 시점에 함수가 실행되도록 해주기.
+
+```vimscript
+autocmd BufRead,BufNewFile *blog/docs/*.md call NewTemplate()
+```
+
+BufRead
+BufNewFile
+
+- 질문 참고 - BufRead 이벤트는 무엇인가요?
+https://stackoverflow.com/questions/15129517/what-is-the-difference-between-bufread-and-bufenter#:~:text=The%20BufRead%20event%20is%20triggered,buffer%20the%20cursor%20is%20in.
+
+Buffer 란 메모리 상의 하나의 파일을 뜻한다고 한다. 
+즉, 하나의 파일을 Vim 에서 읽어왔을때 BufRead 이벤트가 발생.
+BufNewFile은 새로운 파일을 생성하는 시점인지, 아니면 새로운 파일을 젖아하는 시점인지 그것이 헷갈린다.
+
+7. 상세 보기
+https://www.gatsbyjs.com/docs/how-to/routing/adding-markdown-pages/#create-a-collection-route-for-the-markdown-files
+
+8. 랜덤 목록 보기
 
 9. link 처리를 위한 transformer customize
 - 어떻게 커스텀 할 수 있을까?
@@ -160,3 +188,4 @@ custom 방법 -
 https://www.gatsbyjs.com/tutorial/remark-plugin-tutorial/
 
 10. 인덱스
+

@@ -1,6 +1,7 @@
-/* eslint-disable react/no-danger */
-
 import { graphql } from 'gatsby';
+
+import Layout from '../components/Layout';
+import Markdown from '../components/Markdown';
 
 function PostPage({ data }) {
   const { markdownRemark } = data;
@@ -8,10 +9,12 @@ function PostPage({ data }) {
 
   return (
     <div>
-      <h1>
-        {frontmatter.title}
-      </h1>
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <Layout>
+        <h1>
+          {frontmatter.title}
+        </h1>
+        <Markdown html={html} />
+      </Layout>
     </div>
   );
 }
