@@ -26,11 +26,6 @@ jobs:
         run: npx jest --verbose --coverage
       - name: Build
         run: npm run build
-  deploy:
-    needs: [build]
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-20.04
-    steps:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

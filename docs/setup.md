@@ -189,3 +189,7 @@ https://www.gatsbyjs.com/tutorial/remark-plugin-tutorial/
 
 10. 인덱스
 
+
+## 글을 올릴때마다 재배포를 해야하는 불편함
+리모트의 데이터 저장소를 활용할 수 있도록 함. 
+- https://www.gatsbyjs.com/plugins/gatsby-source-git/
