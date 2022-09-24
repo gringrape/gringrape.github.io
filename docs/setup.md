@@ -193,3 +193,12 @@ https://www.gatsbyjs.com/tutorial/remark-plugin-tutorial/
 ## 글을 올릴때마다 재배포를 해야하는 불편함
 리모트의 데이터 저장소를 활용할 수 있도록 함. 
 - https://www.gatsbyjs.com/plugins/gatsby-source-git/
+
+## 기타 수정 사항 기록
+### description 항목이 메타데이터 항목에 추가되도록 함. 
+글 생성시 템플릿에 자동으로 들어가도록 반영함.
+
+```vimscript
+call add(l:template, 'description : ')
+```
+
