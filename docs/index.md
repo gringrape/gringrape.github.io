@@ -16,6 +16,9 @@ title: "목차"
 ## 알고리즘
 - [[비트연산]]
 
+## SICP Lectures
+- [[Overview and Introduction to Lisp]]
+
 ## 코딩인터뷰 완전분석
 ### 배열과 문자열
 - [[1-1]]
