@@ -6,6 +6,7 @@ title: "목차"
 
 ## 블로그 만들기
 - [[setup]]
+- [[vim-startify]]
 
 ## Container 기술
 - [[Container의 정체와 보안]]
