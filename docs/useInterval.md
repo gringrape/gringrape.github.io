@@ -1,5 +1,5 @@
 ---
-slug    : useinterval
+slug    : /useinterval
 title   : useInterval
 description   : side effect를 이해하고 setInterval을 보다 선언적으로 만들기
 date    : 2022-09-23 07:35:09 +0900
