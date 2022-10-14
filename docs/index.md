@@ -26,6 +26,9 @@ title: "목차"
 - [[병렬 프로그래밍]]
 - [[병렬 프로그래밍- 객체 공유]]
 
+## Clean Code
+- [[Args 예제]]
+
 ## Chrome Extension
 - [[tutorial]]
 
