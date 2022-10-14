@@ -23,6 +23,7 @@ title: "목차"
 
 ## SICP Lectures
 - [[Overview and Introduction to Lisp]]
+- [[Procedures and Process, Substitution model]]
 
 ## Java
 - [[병렬 프로그래밍]]
