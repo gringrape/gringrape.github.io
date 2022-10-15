@@ -42,6 +42,22 @@ data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
 <li>로컬에서 작동을 확인한다.</li>
 <li>배포한다.</li>
 </ul>
+<h3>gatsby-source-git의 동작 원리</h3>
+<blockquote>
+<p>It clones the repo(s) you configure (a shallow clone, into your cache folder if you’re interested), and then sucks the files into the graph as File nodes, as if you’d configured gatsby-source-filesystem on that directory. As such, all the tranformer plugins that operate on files should work exactly as they do with gatsby-source-filesystem eg with gatsby-transformer-remark, gatsby-transformer-json etc.</p>
+</blockquote>
+<p>리모트 저장소를 클론해서 설정한 폴더에 집어넣고, <code>File</code> node 를 갖는 그래프 형태의 API 를 제공한다. 저장소를 클론하는 위치를 변경하려면 <code>local</code> 옵션을 활용한다. <code>local</code> 옵션에 대한 설명을 참고하자.</p>
+<blockquote>
+<p>Specify the local path for the cloned repo. If omitted, it will default to a directory within the local Gatsby cache. Note that using a location outside the cache will prevent you changing the branch via gatsby-config.js. You will need to synchronise the branch of the local checkout yourself. However if clones are painful and slow for you, then using a custom location will prevent your local repo getting trashed when Gatsby clears the cache, which should help.</p>
+</blockquote>
+<p>cache 안으로 들어오는 것을 알 수 있다. 정말로 잘 들어오는지 확인해보자.</p>
+<p>`.cache/gatsby-source-git/posts' 하위에서 문서들을 제공하는 것을 확인할 수 있다.</p>
+<h3>오류 해결</h3>
+<p>다음과 같은 오류가 발생한다.</p>
+<blockquote>
+<p>Cannot query field "frontmatter" on type "MarkdownRemark".</p>
+</blockquote>
+<p><code>gatsby-source-git</code>으로 변경하는 경우, graphQL 노드에 변화가 생기는 듯 하다. 확인해보자.</p>
 <h3>저장소 주소 연동</h3>
 <p>기존의 gatsby 설정은 다음과 같았다.</p>
 <p><code>gatsby.config.js</code>:</p>
@@ -54,5 +70,4 @@ data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
     __key: 'pages',
   },
 
-</code></pre>
-<p>일단 후퇴 -- 파일 시스템 때문에 안된다.</p></div></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/blog/git-source/";window.___webpackCompilationHash="4b044c6fb2b741d563f1";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-1ca6ce274660dcfdb636.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-d6e9070a07609d8dfdc4.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-6cbbba986f22fa18bd01.js"],"component---src-pages-random-jsx":["/component---src-pages-random-jsx-2a693e225b8e303f56aa.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-1ca6ce274660dcfdb636.js" async=""></script><script src="/framework-50fec33b852e34892bbd.js" async=""></script><script src="/webpack-runtime-f9d2245c68273fb5c452.js" async=""></script></body></html>
+</code></pre></div></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/blog/git-source/";window.___webpackCompilationHash="4b044c6fb2b741d563f1";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-1ca6ce274660dcfdb636.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-d6e9070a07609d8dfdc4.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-6cbbba986f22fa18bd01.js"],"component---src-pages-random-jsx":["/component---src-pages-random-jsx-2a693e225b8e303f56aa.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-1ca6ce274660dcfdb636.js" async=""></script><script src="/framework-50fec33b852e34892bbd.js" async=""></script><script src="/webpack-runtime-f9d2245c68273fb5c452.js" async=""></script></body></html>
