@@ -7,3 +7,6 @@ public
 
 # Vim
 *.swp
+
+#
+.DS_Store
