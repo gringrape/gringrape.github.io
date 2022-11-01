@@ -22,75 +22,28 @@ data-styled.g4[id="Header__Logo-sc-1jtwnco-2"]{content:"dhlXMq,"}/*!sc*/
 data-styled.g5[id="Layout__Container-sc-4fi6mz-0"]{content:"eOBOLL,"}/*!sc*/
 .bPuUFC{margin:0 auto;max-width:calc(800px - 4em);padding:2em;}/*!sc*/
 data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
-</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>목차</h1><div class="markdown-body"><h2>블로그 만들기</h2>
+</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>Limited direct execution 에 대해 알아보자</h1><div class="markdown-body"><h2>직접 실행의 문제점</h2>
 <ul>
-<li>[[setup]]</li>
-<li>[[vim-startify]]</li>
-<li>[[글 저장소 분리]]</li>
+<li>사용자 프로세스가 시스템 전반의 권한을 모두 가지게 할 수는 없다. 보호가 필요.</li>
+<li>시분할을 하기 위해서는 현재 실행되는 프로세스를 바꿔 줄 필요가 있다.</li>
 </ul>
-<h2>Container 기술</h2>
+<h2>"Limited" Direct Execution</h2>
 <ul>
-<li>[[Container의 정체와 보안]]</li>
-<li>[[cgroups]]</li>
-<li>[[Container 격리]]</li>
+<li>직접 실행에서 야기되는 문제를 해결하기 위해, 추가적인 메커니즘이 필요.</li>
+<li>이런 메커니즘들은 <code>Restriction</code>이라고 볼 수 있다.</li>
+<li>따라서 제한된 직접 실행이라는 표현을 활용함.</li>
 </ul>
-<h2>인증</h2>
+<h2>프로세스가 할 수 있는 일의 제한</h2>
 <ul>
-<li>[[비밀번호 해싱]]</li>
+<li>권한을 나눠서, 해당 권한에서 할 수 있는 일만 하자.</li>
+<li><code>User mode</code>와 <code>Kernel mode</code>를 나눈다.</li>
+<li>시스템 호출과 같이 중요한 것은 <code>Kernel mode</code>에서 수행한다.</li>
+<li>프로세스에서 시스템 호출이 필요한 경우? -> <code>Trap instruction</code> 을 활용한다.</li>
+<li>커널에서 필요한 시스템 호출을 수행한 후에 <code>Return trap instruction</code>을 통해서 다시 프로세스로 돌아온다.</li>
 </ul>
-<h2>React</h2>
+<h2>프로세스 전환</h2>
 <ul>
-<li>[[useInterval]]</li>
-</ul>
-<h2>알고리즘</h2>
-<ul>
-<li>[[비트연산]]</li>
-</ul>
-<h2>SICP Lectures</h2>
-<ul>
-<li>[[Overview and Introduction to Lisp]]</li>
-<li>[[Procedures and Process, Substitution model]]</li>
-</ul>
-<h2>Java</h2>
-<ul>
-<li>[[병렬 프로그래밍]]</li>
-<li>[[병렬 프로그래밍- 객체 공유]]</li>
-</ul>
-<h2>Clean Code</h2>
-<ul>
-<li>[[Args 예제]]</li>
-</ul>
-<h2>Chrome Extension</h2>
-<ul>
-<li>[[tutorial]]</li>
-</ul>
-<h2>운영체제</h2>
-<ul>
-<li>[[운영체제가 하는 일]]</li>
-<li>[[Limited Direct Execution]]</li>
-</ul>
-<h2>데이터베이스</h2>
-<ul>
-<li>[[인덱스]]</li>
-<li>[[정규화와 비정규화]]</li>
-</ul>
-<h2>코딩인터뷰 완전분석</h2>
-<h3>배열과 문자열</h3>
-<ul>
-<li>[[1-1]]</li>
-<li>[[1-2]]</li>
-<li>[[1-3]]</li>
-<li>[[1-4]]</li>
-<li>[[1-5]]</li>
-<li>[[1-6]]</li>
-<li>[[1-7]]</li>
-</ul>
-<h3>연결리스트</h3>
-<h3>스택과 큐</h3>
-<ul>
-<li>[[3-5]]</li>
-</ul>
-<h3>트리와 그래프</h3>
-<ul>
-<li>[[내용 정리]]</li>
-</ul></div></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/blog/";window.___webpackCompilationHash="4b044c6fb2b741d563f1";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-1ca6ce274660dcfdb636.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-d6e9070a07609d8dfdc4.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-6cbbba986f22fa18bd01.js"],"component---src-pages-random-jsx":["/component---src-pages-random-jsx-2a693e225b8e303f56aa.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-1ca6ce274660dcfdb636.js" async=""></script><script src="/framework-50fec33b852e34892bbd.js" async=""></script><script src="/webpack-runtime-f9d2245c68273fb5c452.js" async=""></script></body></html>
+<li>협력적인 설계 -> 프로세스가 명시적인 시스템 호출을 통해 제어권을 운영체제에 넘겨준다.</li>
+<li>비협력적인 설계 -> 일정시간이 지나면, 제어권이 강제로 운영체제로 넘어온다.</li>
+<li>메커니즘은 비슷, 현재 실행되고 있는 프로세스의 상태를 저장하고, 실행될 프로세스의 상태를 복원하는 것.</li>
+</ul></div></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/ostep/5-limited-direct-execution/";window.___webpackCompilationHash="4b044c6fb2b741d563f1";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-1ca6ce274660dcfdb636.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-d6e9070a07609d8dfdc4.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-6cbbba986f22fa18bd01.js"],"component---src-pages-random-jsx":["/component---src-pages-random-jsx-2a693e225b8e303f56aa.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-1ca6ce274660dcfdb636.js" async=""></script><script src="/framework-50fec33b852e34892bbd.js" async=""></script><script src="/webpack-runtime-f9d2245c68273fb5c452.js" async=""></script></body></html>
