@@ -54,6 +54,9 @@ data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
 <h3>Young and Old</h3>
 <p><code>Young</code>과 <code>Old</code>로 메모리 영역을 나누어 놓는 설계에는 두가지 장점이 존재한다. 첫번째는, 가비지 컬렉션 속도이다. 전체 영역을 대상으로 할때와 비교해서, 다루는 공간의 크기가 훨씬 작아지기 때문에 더 빠른 속도로 연산을 할 수 있게 된다. 하지만, 여기에는 트레이드 오프가 존재한다. 영역이 작다는 말은 더 빠른속도로 공간이 가득 찬다는 뜻이기 때문에, 더욱 빈번하게 가비지 컬렉션을 해주어야 한다는 말이 된다. 가비지 컬렉션은 <code>stop the world</code> 연산이므로, 최대한 빠르게 수행하는 것이 전체적으로 이득이 된다.</p>
 <p>두번째 장점은, 영역이 바뀌는 과정에서 자연스럽게 <code>compaction</code>이 일어난다는 것이다. 살아남은 객체들은 다음 메모리 공간으로 복사되기 때문에 이 과정에서 파편화가 제거되게 된다.</p>
+<h3>Young generation</h3>
+<p>Young generation 영역을 이해하기 위해서는 <code>minor GC</code>가 이루어지는 메커니즘을 알아야한다. <code>Young generation</code>은 <code>eden</code> 영역과 두개의 <code>survivor</code>영역으로 나누어지게 되는데, <code>survivor</code> 영역들의 역할은 <code>from</code> 과 <code>to</code>로 구분된다. <code>eden</code> 영역이 꽉 차면, <code>minor GC</code>가 이루어지고, <code>eden</code> 영역과 <code>from</code>의 객체 들 중 살아있는 것들이, 비어있는 <code>to</code> 영역으로 이동하게 된다. 다음번 GC에서는 <code>from</code>과 <code>to</code>의 역할을 교대하게 된다. 이런 과정을 몇 번 거쳐서 충분히 성숙한 객체들만이 <code>old</code> 영역에 도달하게 된다.</p>
+<p>이 과정에서도 복사는 항상 빈 영역에 이루어지게 되므로, <code>compaction</code>이 자동으로 이루어지게 되는 것을 확인해 볼 수 있다.</p>
 <h2>참고</h2>
 <ul>
 <li>기본적인 알고리즘 - <a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)">https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)</a></li>
