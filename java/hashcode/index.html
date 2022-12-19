@@ -22,80 +22,56 @@ data-styled.g4[id="Header__Logo-sc-1jtwnco-2"]{content:"dhlXMq,"}/*!sc*/
 data-styled.g5[id="Layout__Container-sc-4fi6mz-0"]{content:"eOBOLL,"}/*!sc*/
 .bPuUFC{margin:0 auto;max-width:calc(800px - 4em);padding:2em;}/*!sc*/
 data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
-</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>목차</h1><div class="markdown-body"><h2>블로그 만들기</h2>
+</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>자바 hashCode</h1><div class="markdown-body"><h1>목차</h1>
 <ul>
-<li>[[setup]]</li>
-<li>[[vim-startify]]</li>
-<li>[[글 저장소 분리]]</li>
+<li>hashing 이란?</li>
+<li>구현상의 유의점</li>
+<li>Java에서 hashCode</li>
 </ul>
-<h2>Container 기술</h2>
+<h2>hashing 이란?</h2>
+<blockquote>
+<p>A hash function is any function that can be used to map data of arbitrary size to fixed-size values. The values returned by a hash function are called hash values, hash codes, digests, or simply hashes. The values are usually used to index a fixed-size table called a hash table.</p>
+</blockquote>
+<p><code>hash function</code>은 임의 크기의 데이터를 고정 크기 값으로 매핑해주는 역할을 한다.</p>
+<h3>왜 사용할까?</h3>
+<blockquote>
+<p>Hash functions and their associated hash tables are used in data storage and retrieval applications to access data in a small and nearly constant time per retrieval.</p>
+</blockquote>
+<p>저장된 데이터에 빠르게 접근하기 위한 용도로 사용한다.</p>
+<h3>유사 개념 - checksum</h3>
+<blockquote>
+<p>A checksum is a small-sized block of data derived from another block of digital data for the purpose of detecting errors that may have been introduced during its transmission or storage.</p>
+</blockquote>
+<p>데이터 전송시의 오류나 위변조 여부를 알아내기 위한 값을 <code>checksum</code>이라고 하며, <code>hash function</code>과는 그 목적에서 구분이 된다. 목적이 다르므로, 설계시의 고려사항도 달라지게 된다.</p>
+<h3>유사 개념 - fingerprint</h3>
+<blockquote>
+<p>In computer science, a fingerprinting algorithm is a procedure that maps an arbitrarily large data item (such as a computer file) to a much shorter bit string, its fingerprint, that uniquely identifies the original data for all practical purposes[1] just as human fingerprints uniquely identify people for practical purposes. This fingerprint may be used for data deduplication purposes. This is also referred to as file fingerprinting, data fingerprinting, or structured data fingerprinting.</p>
+</blockquote>
+<p><code>fingerprint</code>는 데이터를 유일하게 식별할 목적으로, 원본보다 훨씬 작은 크기의 데이터를 만드는 것을 뜻한다. 사람의 지문과 같은 개념.</p>
+<h2>구현상의 유의점</h2>
+<h3>Uniformity - 결과값의 분포가 균일해야 한다</h3>
+<blockquote>
+<p>A good hash function should map the expected inputs as evenly as possible over its output range. That is, every hash value in the output range should be generated with roughly the same probability. The reason for this last requirement is that the cost of hashing-based methods goes up sharply as the number of collisions—pairs of inputs that are mapped to the same hash value—increases.</p>
+</blockquote>
+<p><code>hash function</code>을 이용하는 경우는, collision이 발생했을 때, 비용이 가파르게 증가하는 경향이 있으므로, collision을 막기 위해, Uniformity 조건이 필요하다.</p>
+<h3>Effciency - 탐색시간과 사용공간 사이의 트레이드 오프</h3>
+<blockquote>
+<p>In data storage and retrieval applications, the use of a hash function is a trade-off between search time and data storage space. If search time were unbounded, a very compact unordered linear list would be the best medium; if storage space were unbounded, a randomly accessible structure indexable by the key-value would be very large, very sparse, but very fast.</p>
+</blockquote>
+<p>저장 공간을 충분히 사용해서 탐색 시간을 줄일 수도 있고, 그와는 반대로 설계할 수도 있다. 적절한 collision비율 설계를 통해, 탐색시간과 공간 사이의 균형을 잡는 것이 좋다.</p>
+<h2>Java에서의 <code>hashCode()</code></h2>
+<blockquote>
+<p>This method is supported for the benefit of hash tables such as those provided by HashMap.</p>
+</blockquote>
+<p>hash table 과 같은 자료 구조에서 활용된다.</p>
+<blockquote>
+<p>This implementation provides constant-time performance for the basic operations (get and put), assuming the hash function disperses the elements properly among the buckets. Iteration over collection views requires time proportional to the "capacity" of the HashMap instance (the number of buckets) plus its size (the number of key-value mappings). Thus, it's very important not to set the initial capacity too high (or the load factor too low) if iteration performance is important.</p>
+</blockquote>
+<p><code>hash function</code>이 bucket에서 요소가 균등하게 분배되도록 한다면, <code>get</code> 혹은 <code>put</code>은 상수시간 연산이 된다.</p>
+<h2>참고</h2>
 <ul>
-<li>[[Container의 정체와 보안]]</li>
-<li>[[cgroups]]</li>
-<li>[[Container 격리]]</li>
-</ul>
-<h2>인증</h2>
-<ul>
-<li>[[비밀번호 해싱]]</li>
-</ul>
-<h2>React</h2>
-<ul>
-<li>[[useInterval]]</li>
-</ul>
-<h2>알고리즘</h2>
-<ul>
-<li>[[비트연산]]</li>
-</ul>
-<h2>SICP Lectures</h2>
-<ul>
-<li>[[Overview and Introduction to Lisp]]</li>
-<li>[[Procedures and Process, Substitution model]]</li>
-</ul>
-<h2>Java</h2>
-<ul>
-<li>[[병렬 프로그래밍]]</li>
-<li>[[병렬 프로그래밍- 객체 공유]]</li>
-</ul>
-<h2>Clean Code</h2>
-<ul>
-<li>[[Args 예제]]</li>
-</ul>
-<h2>Chrome Extension</h2>
-<ul>
-<li>[[tutorial]]</li>
-</ul>
-<h2>운영체제</h2>
-<ul>
-<li>[[운영체제가 하는 일]]</li>
-<li>[[Limited Direct Execution]]</li>
-</ul>
-<h2>데이터베이스</h2>
-<ul>
-<li>[[인덱스]]</li>
-<li>[[정규화와 비정규화]]</li>
-</ul>
-<h2>코딩인터뷰 완전분석</h2>
-<h3>배열과 문자열</h3>
-<ul>
-<li>[[1-1]]</li>
-<li>[[1-2]]</li>
-<li>[[1-3]]</li>
-<li>[[1-4]]</li>
-<li>[[1-5]]</li>
-<li>[[1-6]]</li>
-<li>[[1-7]]</li>
-</ul>
-<h3>연결리스트</h3>
-<h3>스택과 큐</h3>
-<ul>
-<li>[[3-5]]</li>
-</ul>
-<h3>트리와 그래프</h3>
-<ul>
-<li>[[내용 정리]]</li>
-</ul>
-<h2>F-Lab</h2>
-<ul>
-<li>[[Java garbage collection]]</li>
-<li>[[hashCode]]</li>
-</ul></div></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/blog/";window.___webpackCompilationHash="4b044c6fb2b741d563f1";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-1ca6ce274660dcfdb636.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-d6e9070a07609d8dfdc4.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-6cbbba986f22fa18bd01.js"],"component---src-pages-random-jsx":["/component---src-pages-random-jsx-2a693e225b8e303f56aa.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-1ca6ce274660dcfdb636.js" async=""></script><script src="/framework-50fec33b852e34892bbd.js" async=""></script><script src="/webpack-runtime-f9d2245c68273fb5c452.js" async=""></script></body></html>
+<li>hashing의 개념 - <a href="https://en.wikipedia.org/wiki/Hash_function">https://en.wikipedia.org/wiki/Hash_function</a></li>
+<li>checksum - <a href="https://en.wikipedia.org/wiki/Checksum">https://en.wikipedia.org/wiki/Checksum</a></li>
+<li>finger print - <a href="https://en.wikipedia.org/wiki/Fingerprint_(computing)">https://en.wikipedia.org/wiki/Fingerprint_(computing)</a></li>
+<li>HashMap - <a href="https://docs.oracle.com/javase/7/docs/api/java/util/HashMap.html">https://docs.oracle.com/javase/7/docs/api/java/util/HashMap.html</a></li>
+</ul></div></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/java/hashcode/";window.___webpackCompilationHash="4b044c6fb2b741d563f1";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-1ca6ce274660dcfdb636.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-d6e9070a07609d8dfdc4.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-6cbbba986f22fa18bd01.js"],"component---src-pages-random-jsx":["/component---src-pages-random-jsx-2a693e225b8e303f56aa.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-1ca6ce274660dcfdb636.js" async=""></script><script src="/framework-50fec33b852e34892bbd.js" async=""></script><script src="/webpack-runtime-f9d2245c68273fb5c452.js" async=""></script></body></html>
