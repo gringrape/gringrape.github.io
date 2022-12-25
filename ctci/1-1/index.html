@@ -22,18 +22,12 @@ data-styled.g4[id="Header__Logo-sc-1jtwnco-2"]{content:"dhlXMq,"}/*!sc*/
 data-styled.g5[id="Layout__Container-sc-4fi6mz-0"]{content:"eOBOLL,"}/*!sc*/
 .bPuUFC{margin:0 auto;max-width:calc(800px - 4em);padding:2em;}/*!sc*/
 data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
-</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>중복이 없는가</h1><div class="markdown-body"><h2>문제</h2>
-<p>문자열에 같은 문자가 중복되어 등장하는지 확인하는 알고리즘 작성.</p>
-<h3>힌트를 어떻게 활용해야 할까?</h3>
-<p>힌트는 책 뒤편에 찾아볼 수 있도록 실려있다.</p>
-<h2>문제 접근</h2>
-<p>문제의 이해.</p>
-<ul>
-<li>주어진 것 - 문자열.</li>
-<li>구하는 것 - 주어진 문자열에 같은 문자가 중복되어 등장하는지 여부.</li>
-</ul>
+</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>코딩인터뷰 완전분석 문제풀이 - 중복이 없는가</h1><div class="markdown-body"><h2>문제 출처</h2>
+<p>코딩인터뷰 완전분석 1-1번 문제</p>
+<h2>문제 설명</h2>
+<p>문자열에 같은 문자가 중복되어 등장하는지 확인하는 알고리즘 작성하는 것이 과제이다.</p>
 <h2>풀이 1. set 자료 구조를 이용한다.</h2>
-<p>set 은 존재 여부를 빠르게 탐색O(1) 할 수 있는 수단이다.</p>
+<p>set 은 존재 여부를 빠르게 탐색O(1) 할 수 있는 수단이다. 글자를 순차적으로 넣으면서, 넣으려고 하는 글자가 set에 이미 존재하는지를 확인하면 된다.</p>
 <h3>풀이 구상</h3>
 <ol>
 <li>문자를 담는 set 구조를 마련한다.</li>
@@ -69,11 +63,11 @@ data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
     return len(string) > len(distinct_letters)
 </code></pre>
 <h2>풀이 4.</h2>
-<p>문제에 주어진 힌트인 #132 를 적용해보자.</p>
+<p>다음 힌트를 적용해보자. 알고리즘의 시간복잡도에 관한 힌트가 주어져있다.</p>
 <blockquote>
 <p><code>O(N log N)</code>에 풀어내기.</p>
 </blockquote>
-<p>이러한 시간 복잡도를 갖는 것은 정렬을 생각해 볼 수 있다.</p>
+<p>이러한 시간 복잡도를 갖는 것은 정렬을 생각해 볼 수 있다. 문자열의 글자들을 정렬해서 현재 문자와 다음 문자가 같다면, 문자가 중복되어 있다고 판단할 수 있다.</p>
 <pre><code class="language-python">def has_duplicate_letters_sorting(string):
     string_in_lexicographic_order = sorted(string)
 
@@ -82,19 +76,11 @@ data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
         for i in range(len(string) - 1)
     )
 </code></pre>
-<h2>해법의 힌트들</h2>
-<h3>문자개수가 유한함을 이용할 수 있다</h3>
-<p>문자 개수 공간 만큼의 boolean 배열을 미리 구성해놓고,
-배열을 순회하며, 존재여부를 업데이트 할 수 있다.</p>
+<h2>추가적인 풀이 방법들</h2>
+<h3>set 대신에 boolean 배열 이용</h3>
+<p>문자 개수 공간 만큼의 boolean 배열을 미리 구성해놓고, 배열을 순회하면서 등장 여부를 업데이트 할 수 있다.</p>
+<p>처음에는 등장여부를 담는 <code>checker</code>배열의 값이 모두 <code>false</code> 였다가, 문자가 등장하면 해당 index의 값을 <code>true</code>로 바꾼다. 만약, 현재 index의 값이 <code>true</code>라면, 이 문자는 중복된 것임을 확인할 수 있다.</p>
 <p>이 경우 시간 복잡도는 O(N), 공간 복잡도는 O(1)이 된다.</p>
-<h3>비트벡터를 활용한다</h3>
-<p>비트벡터를 이용하면, 사용하는 저장공간을 훨씬 줄일 수 있다.
-boolean 배열은 여러개의 비트 공간을 의미할 수 있다.</p>
-<h2>python 풀이</h2>
-<ul>
-<li><a href="https://github.com/gringrape/coding-life/blob/main/20220923/ctci-1-1/python/test_has_duplicate_letters.py">https://github.com/gringrape/coding-life/blob/main/20220923/ctci-1-1/python/test_has_duplicate_letters.py</a></li>
-</ul>
-<h2>평범한 Array 를 활용한 풀이</h2>
 <pre><code class="language-java">boolean hasDuplicateLettersArray(String string) {
     boolean[] checker = new boolean[string.length()];
     for (int i = 0; i &#x3C; string.length(); i += 1) {
@@ -108,7 +94,8 @@ boolean 배열은 여러개의 비트 공간을 의미할 수 있다.</p>
     return false;
 }
 </code></pre>
-<h2>비트벡터를 활용한 풀이</h2>
+<h3>boolean 배열 대신에 비트벡터 활용</h3>
+<p>비트벡터를 이용하면, boolean 배열과 같은 기능을 하면서,  사용하는 저장공간을 훨씬 줄일 수 있다.</p>
 <pre><code class="language-java">boolean hasDuplicateLettersBit(String string) {
     int checker = 0;
     for (int i = 0; i &#x3C; string.length(); i += 1) {
@@ -116,13 +103,11 @@ boolean 배열은 여러개의 비트 공간을 의미할 수 있다.</p>
         int index = l - 'a';
         if ((checker &#x26; (1 &#x3C;&#x3C; index)) > 0) {
             return true;
-        }
-        checker |= (1 &#x3C;&#x3C; index);
-    }
-    return false;
-}
-
 </code></pre>
+<h2>풀이 코드 링크</h2>
+<ul>
+<li><a href="https://github.com/gringrape/coding-life/blob/main/20220923/ctci-1-1/python/test_has_duplicate_letters.py">https://github.com/gringrape/coding-life/blob/main/20220923/ctci-1-1/python/test_has_duplicate_letters.py</a></li>
+</ul>
 <h2>참고</h2>
 <ul>
 <li>python sorting - <a href="https://docs.python.org/3/howto/sorting.html">https://docs.python.org/3/howto/sorting.html</a></li>
