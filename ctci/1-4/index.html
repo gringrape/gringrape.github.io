@@ -22,16 +22,37 @@ data-styled.g4[id="Header__Logo-sc-1jtwnco-2"]{content:"dhlXMq,"}/*!sc*/
 data-styled.g5[id="Layout__Container-sc-4fi6mz-0"]{content:"eOBOLL,"}/*!sc*/
 .bPuUFC{margin:0 auto;max-width:calc(800px - 4em);padding:2em;}/*!sc*/
 data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
-</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>회문 순열</h1><div class="markdown-body"><h2>회문 순열의 특징</h2>
-<ul>
-<li>같은 문자는 반드시 짝수번 등장한다.</li>
-</ul>
+</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>회문 순열</h1><div class="markdown-body"><h2>회문 순열이란?</h2>
+<p>어떤 문자열이 주어질때, 문자열을 이루는 글자들의 순서를 바꾸어서 회문(palindrome)을 만들 수 있다면, 이 문자열을 회문 순열이라고 한다. 예를 들어, "aabbc" 와 같은 경우는 순서를 바꿔서 "bacab" 와 같은 회문으로 만들 수 있으므로 회문순열이 될 수 있다. .</p>
+<h2>어떤 문자열이 회문 순열에 속하는지 알아내는 법</h2>
+<p>어떤 문자열이 회문인지 판단하기 위해서, 글자 순서를 바꾼 모든 문자열을 만드는 방법도 있다. 모든 경우의 수를 만들어 놓고 그 중에 회문이 있는지를 검사하는 것이다. 이 경우 로직은 이해하기 쉽고 단순하겠지만, 계산상의 부담이 있을 수 있고 따라서 자원의 비효율적 소모라는 문제도 있을 수 있다.</p>
+<h3>특징을 정의</h3>
+<p>모든 경우에서 만족하는 어떤 <code>특징</code>을 정의하고, 어떤 문자열이 이 <code>특징</code>을 갖고 있다는 것을 검사하는 방법도 있다. 이런 아이디어는 <code>property based testing</code>에서도 찾아 볼 수 있다.</p>
+<h2>회문 순열의 특징</h2>
+<p>회문으로 바꾸었을때, 가운데 위치하는 글자와 그 이외 글자를 나누어서 생각해 볼 수 있다.</p>
+<h3>가운데 글자</h3>
+<p>문자열의 길이가 홀수 인 경우에, 가운데 글자가 존재한다. 가운데 글자가 존재한다면, 다음을 만족해야 한다.</p>
+<blockquote>
+<p>가운데 글자는 반드시 홀수 번 등장해야 한다.</p>
+</blockquote>
+<h3>나머지 글자</h3>
+<p>이외 글자는 다음 조건을 만족한다.</p>
+<blockquote>
+<p>같은 글자는 반드시 짝수 번 등장한다.</p>
+</blockquote>
+<p>전체 글자를 놓고 생각해본다면, 홀수 인 글자가 0 또는 1개 존재하고, 나머지 글자의 개수가 모두 짝수 인 경우에 회문순열이 된다고 볼 수 있다.</p>
 <h2>풀이 구상</h2>
+<p>기본적으로 주어진 문자열이 회문순열의 <code>특징</code>을 갖고 있는지 검사하는 방식으로 진행된다.</p>
+<blockquote>
 <ul>
 <li>문자의 등장 횟수를 센다. -> 짝수번 등장하는지 검사한다.</li>
+</ul>
+</blockquote>
+<ul>
 <li>등장 회수를 세는 수단은 해시 테이블이 있다.</li>
 <li>비트벡터를 이용해서 셀 수도 있다.</li>
 </ul>
+<p>각 글자의 등장 횟수를 세는 방식에서 차이점이 나타나는데, 정확한 등장 횟수를 원한다면 해시 테이블이 용이 하고, 구체적인 횟수보다 홀수 짝수 인지 여부만 중요한 경우에는 비트벡터를 활용할 수 있다. 비트벡터를 이용하면 결과물의 해상도가 떨어지는 대신 (구체적 횟수 -> 홀짝 여부) 보다 적은 공간을 활용해서 연산할 수 있다는 장점이 있다.</p>
 <h2>비트벡터를 이용한 풀이</h2>
 <h3>비트벡터의 테스트 작성</h3>
 <p>이번 문제에서는 특정 자리의 수를 반전 시키는 toggle 연산이 필요하다.</p>
@@ -104,11 +125,6 @@ mask와 &#x26; 연산을 하는 경우, 특정 자리의 값만 남고 나머지
 011111
 </code></pre>
 <p>원래 숫자와 <code>&#x26;</code> 연산을 하면, 값이 0이 되는 효과가 나타난다.</p>
-<h2>어떤 문자열이 특정 그룹(회문 순열)에 속하는지 판단하는 방법</h2>
-<p>가장 쉽게 생각할 수 있는 것은, 문자열의 순서를 바꾼 순열을 모두 구해서
-회문이 되는지 판단하는 것이다. 하지만, 꼭 모든 경우의 수를 구해야 하는 것은 아니다.<br>
-회문 순열이 갖는 일반적인 규칙을 파악하고, 문자열이 해당 규칙을 만족하는지를 체크하면,<br>
-모든 경우의 수를 구하지 않고도 문제를 해결할 수 있다.</p>
 <h2>참고</h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Mask_(computing)">https://en.wikipedia.org/wiki/Mask_(computing)</a></li>
