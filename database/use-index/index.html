@@ -33,9 +33,19 @@ data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
 <p>사용하려는 key 종류가 많을때 이러한 방식은 문제가 된다. 메모리에 모든 키를 저장해놓고 써야 하는데 이로인해 공간을 많이 사용하게 되는 문제가 있다. <code>SSTable</code>을 이용하면 이런 문제를 해결하는데 도움이 된다.</p>
 <p><code>SSTable</code>에서는 key 값이 정렬된 상태로 존재하므로, 인덱스에 모든 key를 저장할 필요가 없게 된다. 정렬된 key를 가진 sparse hash table을 사용할 수 있다. 찾으려고 하는 키가 sparse hash table의 두 키 사이에 있다면, 해당 위치의 탐색을 통해서 찾을 수 있다.</p>
 <p><img src="https://user-images.githubusercontent.com/53764714/209679397-9221ccc2-5714-4c09-82b8-78ce9dd91973.png" alt=""></p>
-<p>이렇게 사이에 존재하는지 (존재하지 않는지) 판별하는 메커니즘을 <code>bloom filter</code>라고 한다.</p>
+<h3>Bloom filter</h3>
+<p><code>SSTable</code>에 대한 탐색을 빠르게 하기 위해서 <code>Bloom filter</code>를 사용한다. <code>Bloom filter</code>는 찾고자 하는 대상이 테이블에 <code>속하지 않는지</code>를 빠르게 알려줄 수 있다. 또한 <code>속할 수도 있다</code>라는 것을 알려주는데 이 경우에는 전체 탐색을 통해서 확실히 존재하는지를 확인해야 한다.</p>
+<p><code>Cassandra</code>의 문서에서도 <code>Bloom filter</code>를 활용해서 <code>SSTable</code> 탐색을 줄이고 있음을 밝히고 있다.</p>
+<blockquote>
+<p>To avoid checking every SSTable data file for the partition being requested, Cassandra employs a data structure known as a bloom filter.</p>
+</blockquote>
+<blockquote>
+<p>Bloom filters are a probabilistic data structure that allows Cassandra to determine one of two possible states: - The data definitely does not exist in the given file, or - The data probably exists in the given file.</p>
+</blockquote>
 <h2>참고</h2>
 <ul>
 <li><a href="https://www.freecodecamp.org/news/database-indexing-at-a-glance-bb50809d48bd/">https://www.freecodecamp.org/news/database-indexing-at-a-glance-bb50809d48bd/</a></li>
 <li>데이터 중심 어플리케이션 설계 Chapter3</li>
+<li>bloom filter - <a href="https://en.wikipedia.org/wiki/Bloom_filter">https://en.wikipedia.org/wiki/Bloom_filter</a></li>
+<li></li>
 </ul></div></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/database/use-index/";window.___webpackCompilationHash="4b044c6fb2b741d563f1";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-1ca6ce274660dcfdb636.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-d6e9070a07609d8dfdc4.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-6cbbba986f22fa18bd01.js"],"component---src-pages-random-jsx":["/component---src-pages-random-jsx-2a693e225b8e303f56aa.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-1ca6ce274660dcfdb636.js" async=""></script><script src="/framework-50fec33b852e34892bbd.js" async=""></script><script src="/webpack-runtime-f9d2245c68273fb5c452.js" async=""></script></body></html>
