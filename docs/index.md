@@ -27,6 +27,9 @@ title: "목차"
 - [[Overview and Introduction to Lisp]]
 - [[Procedures and Process, Substitution model]]
 
+## SICP book
+- [[Data Abstraction의 가치]]
+
 ## Java
 - [[병렬 프로그래밍]]
 - [[병렬 프로그래밍- 객체 공유]]
