@@ -33,6 +33,10 @@ data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
 <p>A hash function is any function that can be used to map data of arbitrary size to fixed-size values. The values returned by a hash function are called hash values, hash codes, digests, or simply hashes. The values are usually used to index a fixed-size table called a hash table.</p>
 </blockquote>
 <p><code>hash function</code>은 임의 크기의 데이터를 고정 크기 값으로 매핑해주는 역할을 한다.</p>
+<h2>hashCode의 목적</h2>
+<p>퍼포먼스 측면에서 이해하면 좋다. 서로 다른 해시값을 갖는 데이터의 경우 서로 다른 데이터이다. 하지만, 서로 같은 해시값을 갖는 경우에는 같은 데이터 일수도 있고, 아닐 수도 있다.</p>
+<p>즉, hash 값은 두개의 객체, 데이터가 서로 다른지를 빠르게 알아내는 방법이 된다. 확실히 같은 지를 비교하기 위해서, 자바에서라면 <code>equals</code> 메서드를 이용할 수 있다.</p>
+<p><code>SSTable</code>의 <code>index</code>에서 활용되는 <code>bloom filter</code>의 경우도 이와 유사한 아이디어로 동작한다.</p>
 <h3>왜 사용할까?</h3>
 <blockquote>
 <p>Hash functions and their associated hash tables are used in data storage and retrieval applications to access data in a small and nearly constant time per retrieval.</p>
