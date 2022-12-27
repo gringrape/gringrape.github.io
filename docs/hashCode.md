@@ -15,6 +15,13 @@ date    : 2022-12-19 13:53:19 +0900
 
 `hash function`은 임의 크기의 데이터를 고정 크기 값으로 매핑해주는 역할을 한다. 
 
+## hashCode의 목적
+퍼포먼스 측면에서 이해하면 좋다. 서로 다른 해시값을 갖는 데이터의 경우 서로 다른 데이터이다. 하지만, 서로 같은 해시값을 갖는 경우에는 같은 데이터 일수도 있고, 아닐 수도 있다. 
+
+즉, hash 값은 두개의 객체, 데이터가 서로 다른지를 빠르게 알아내는 방법이 된다. 확실히 같은 지를 비교하기 위해서, 자바에서라면 `equals` 메서드를 이용할 수 있다.
+
+`SSTable`의 `index`에서 활용되는 `bloom filter`의 경우도 이와 유사한 아이디어로 동작한다. 
+
 ### 왜 사용할까?
 > Hash functions and their associated hash tables are used in data storage and retrieval applications to access data in a small and nearly constant time per retrieval. 
 
