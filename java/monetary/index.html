@@ -22,91 +22,26 @@ data-styled.g4[id="Header__Logo-sc-1jtwnco-2"]{content:"dhlXMq,"}/*!sc*/
 data-styled.g5[id="Layout__Container-sc-4fi6mz-0"]{content:"eOBOLL,"}/*!sc*/
 .bPuUFC{margin:0 auto;max-width:calc(800px - 4em);padding:2em;}/*!sc*/
 data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
-</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>목차</h1><div class="markdown-body"><h2>블로그 만들기</h2>
+</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>자바에서 화폐 계산은 어떻게 해야 할까?</h1><div class="markdown-body"><ul>
+<li>float, double은 문제가 있음.
 <ul>
-<li>[[setup]]</li>
-<li>[[vim-startify]]</li>
-<li>[[글 저장소 분리]]</li>
+<li>0.1 과 같은 수에 대해 정확한 이진 표현이 불가능함.</li>
+<li>반올림 처리를 통해서 해결할 수 있으나 여러번의 연산이 이뤄지는 상황에서는 사실상 정확성을 보장하기 힘들어짐.</li>
 </ul>
-<h2>Container 기술</h2>
+</li>
+<li>BigDecimal
 <ul>
-<li>[[Container의 정체와 보안]]</li>
-<li>[[cgroups]]</li>
-<li>[[Container 격리]]</li>
+<li>정확성을 보장해준다는 장점이 있음.</li>
+<li>사용하기 불편하고 퍼포먼스상의 단점이 존재함.</li>
 </ul>
-<h2>인증</h2>
+</li>
+<li>int, long
 <ul>
-<li>[[비밀번호 해싱]]</li>
+<li>대안으로 int, long을 사용할 수 있음.</li>
+<li>단 유효숫자 이외에 소수점이 어디에 위치하는지는 추적하는 코드가 필요함.</li>
+<li>BigDecimal에 비해서 정확성은 떨어지나 사용하기 편하고, 퍼포먼스상의 이점이 있음.</li>
+<li>int의 경우 유효숫자의 개수를 9개, long의 경우 18개 사용가능.</li>
 </ul>
-<h2>React</h2>
-<ul>
-<li>[[useInterval]]</li>
-</ul>
-<h2>알고리즘</h2>
-<ul>
-<li>[[비트연산]]</li>
-</ul>
-<h2>SICP Lectures</h2>
-<ul>
-<li>[[Overview and Introduction to Lisp]]</li>
-<li>[[Procedures and Process, Substitution model]]</li>
-</ul>
-<h2>SICP book</h2>
-<ul>
-<li>[[Data Abstraction의 가치]]</li>
-</ul>
-<h2>Java</h2>
-<ul>
-<li>[[병렬 프로그래밍]]</li>
-<li>[[병렬 프로그래밍- 객체 공유]]</li>
-</ul>
-<h2>Clean Code</h2>
-<ul>
-<li>[[Args 예제]]</li>
-<li>[[객체와 자료구조]]</li>
-<li>[[클래스]]</li>
-</ul>
-<h2>Chrome Extension</h2>
-<ul>
-<li>[[tutorial]]</li>
-</ul>
-<h2>운영체제</h2>
-<ul>
-<li>[[운영체제가 하는 일]]</li>
-<li>[[Limited Direct Execution]]</li>
-</ul>
-<h2>데이터베이스</h2>
-<ul>
-<li>[[인덱스]]</li>
-<li>[[정규화와 비정규화]]</li>
-</ul>
-<h2>코딩인터뷰 완전분석</h2>
-<h3>배열과 문자열</h3>
-<ul>
-<li>[[1-1]]</li>
-<li>[[1-2]]</li>
-<li>[[1-3]]</li>
-<li>[[1-4]]</li>
-<li>[[1-5]]</li>
-<li>[[1-6]]</li>
-<li>[[1-7]]</li>
-</ul>
-<h3>연결리스트</h3>
-<h3>스택과 큐</h3>
-<ul>
-<li>[[3-5]]</li>
-</ul>
-<h3>트리와 그래프</h3>
-<ul>
-<li>[[내용 정리]]</li>
-</ul>
-<h2>F-Lab</h2>
-<ul>
-<li>[[Java garbage collection]]</li>
-<li>[[hashCode]]</li>
-<li>[[상속과 조합]]</li>
-<li>[[final 키워드]]</li>
-<li>[[Exception]]</li>
-<li>[[HashMap]]</li>
-<li>[[Java에서 화폐 계산은 어떻게 해야할까]]</li>
-</ul></div></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/blog/";window.___webpackCompilationHash="4b044c6fb2b741d563f1";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-1ca6ce274660dcfdb636.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-d6e9070a07609d8dfdc4.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-6cbbba986f22fa18bd01.js"],"component---src-pages-random-jsx":["/component---src-pages-random-jsx-2a693e225b8e303f56aa.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-1ca6ce274660dcfdb636.js" async=""></script><script src="/framework-50fec33b852e34892bbd.js" async=""></script><script src="/webpack-runtime-f9d2245c68273fb5c452.js" async=""></script></body></html>
+</li>
+<li>JSR 354 <a href="https://download.oracle.com/otn-pub/jcp/money_currency-1_0-fr-spec/JavaMoney_Specification_1.0-final.pdf?AuthParam=1672145163_40361b8a4976b56a126a2573189a6636">https://download.oracle.com/otn-pub/jcp/money_currency-1_0-fr-spec/JavaMoney_Specification_1.0-final.pdf?AuthParam=1672145163_40361b8a4976b56a126a2573189a6636</a></li>
+</ul></div></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/java/monetary/";window.___webpackCompilationHash="4b044c6fb2b741d563f1";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-1ca6ce274660dcfdb636.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-d6e9070a07609d8dfdc4.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-6cbbba986f22fa18bd01.js"],"component---src-pages-random-jsx":["/component---src-pages-random-jsx-2a693e225b8e303f56aa.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-1ca6ce274660dcfdb636.js" async=""></script><script src="/framework-50fec33b852e34892bbd.js" async=""></script><script src="/webpack-runtime-f9d2245c68273fb5c452.js" async=""></script></body></html>
