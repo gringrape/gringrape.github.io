@@ -23,33 +23,24 @@ data-styled.g5[id="Layout__Container-sc-4fi6mz-0"]{content:"eOBOLL,"}/*!sc*/
 .bPuUFC{margin:0 auto;max-width:calc(800px - 4em);padding:2em;}/*!sc*/
 data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
 </style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>비밀번호 해싱 알고리즘</h1><div class="markdown-body"><h2>hash function</h2>
-<ul>
-<li>메시지를 해시 값으로 매핑해주는 함수.</li>
-<li>단방향
-<ul>
-<li>해시에 해당하는 메시지를 알기 위해서는 brute force 방식을 활용.</li>
-<li>Rainbow table 활용 -> 채굴과의 연관성 조사!</li>
-</ul>
-</li>
-<li>결정적, 같은 데이터라면 언제나 같은 반환값.</li>
-<li>데이터에 조그마한 변화가 해시값을 크게 변화시켜야 함. 데이터와 해시값 사이의 연관관계를 추적할 수 없도록. (avalanche effect)</li>
-</ul>
-<h3>avalanche effect</h3>
+<p>임의의 데이터를 고정된 크기의 값으로 매핑해주는 함수를 <code>hash function</code>이라고 한다.</p>
+<h3>Avalanche effect</h3>
+<p>해시 함수가 생성하는 값들이 균일하게 분포함을 검사하는 수단으로 <code>avalanche criterion</code>을 들 수 있다. <code>avalanche effect</code>에 대한 설명은 다음과 같다.</p>
 <blockquote>
 <p>if an input is changed slightly (for example, flipping a single bit), the output changes significantly (e.g., half the output bits flip). In the case of high-quality block ciphers, such a small change in either the key or the plaintext should cause a drastic change in the ciphertext.</p>
 </blockquote>
+<p>입력값이 아주 조금 변하는 경우에도 출력값에 많은 변화가 생기는 효과이다.</p>
 <h2>Password verification</h2>
-<p>비밀번호를 그대로 저장하는 것은 위험. 비밀번호의 해시값만을 저장하고, 사용자가 비밀번호를 입력하면, 입력한 비밀번호의 해시를 저장된 해시와 비교해서 인증.</p>
+<p>데이터베이스에 사용자의 비밀번호를 그대로 저장하는 것은 위험하다. 비밀번호의 해시값만을 저장하는 것이 좋다. 인증시에는 사용자가 비밀번호를 입력하면 입력한 비밀번호의 해시를 계산한 후에 저장된 해시와 비교하는 프로세스를 거친다.</p>
 <blockquote>
 <p>One way to reduce this danger is to only store the hash digest of each password.
 To authenticate a user, the password presented by the user is hashed and compared with the stored hash.</p>
 </blockquote>
-<h3>보안 위험</h3>
-<p>비밀번호를 해시로 저장하는 경우, 데이터베이스가 도난당해도 단지 해시값만 유출될 뿐이다. 하지만 비밀번호를 생성하는 패턴의 수가 한정적이고, 해시값 생성이 빠른 fast hash 를 사용한다면, 모든 조합을 테스트해보는 식으로 공격을 할 수 있다.</p>
-<p>cryptographic salt를 이용한다면 몇몇의 공격을 방어할 수 있다. 하지만, 그래픽카드를 이용하면, 초당 1000억회의 연산이 가능하므로, 취약할 수 있다. NIST에서는 brute force 연산을 느리게 만들 수 있는 해시 함수를 사용할 것을 권장한다. (bcrypt, argon2, balloon 등도 이에 해당)</p>
+<h3>Slow hash vs Fast hash</h3>
+<p>비밀번호를 해시로 저장하는 경우에 저장된 해시값이 유출되는 경우가 있다. 만약 비밀번호 패턴이 한정적이고, 해시값 생성이 빠른 fast hash 를 사용한다면, <code>multiple core GPU</code>등을 통해 모든 조합을 테스트해보는 식으로 공격을 할 수 있다.</p>
+<p>NIST에서는 이러한 보안상의 위협을 방지하기 위해서 <code>Memory hard function</code>을 해시함수로 사용할 것을 권장하고 있다. <code>Memory hard function</code>을 사용하면 메모리 부하가 큰 해시 연산으로 인해서 반복적인 해시 연산을 매우 느리거나 불가능하게 만든다.(bcrypt, argon2, balloon 등도 이에 해당)</p>
 <h2>Argon2</h2>
-<p>Argon2 spec 문서에서의 소개를 보면, 배경을 짐작할 수 있다.<br>
-<a href="https://www.password-hashing.net/argon2-specs.pdf">https://www.password-hashing.net/argon2-specs.pdf</a></p>
+<p>Argon2 spec 문서에서의 소개를 보면, 배경을 짐작할 수 있다.</p>
 <blockquote>
 <p>In the meanwhile, the password crackers migrated to new architectures, such as FPGAs, multiple-core GPUs
 and dedicated ASIC modules, where the amortized cost of a multiple-iterated hash function is much lower. It
@@ -65,4 +56,5 @@ penalties if less memory is used. The password hashing scheme scrypt [13] is an 
 <li>avalanhe effect - <a href="https://en.wikipedia.org/wiki/Avalanche_effect">https://en.wikipedia.org/wiki/Avalanche_effect</a></li>
 <li>crypto graphic salt - <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)">https://en.wikipedia.org/wiki/Salt_(cryptography)</a></li>
 <li>NIST - <a href="https://en.wikipedia.org/wiki/National_Institute_of_Standards_and_Technology">https://en.wikipedia.org/wiki/National_Institute_of_Standards_and_Technology</a></li>
+<li>Argon2 specification - <a href="https://www.password-hashing.net/argon2-specs.pdf">https://www.password-hashing.net/argon2-specs.pdf</a></li>
 </ul></div></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/password-hashing/";window.___webpackCompilationHash="4b044c6fb2b741d563f1";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-1ca6ce274660dcfdb636.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-d6e9070a07609d8dfdc4.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-6cbbba986f22fa18bd01.js"],"component---src-pages-random-jsx":["/component---src-pages-random-jsx-2a693e225b8e303f56aa.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-1ca6ce274660dcfdb636.js" async=""></script><script src="/framework-50fec33b852e34892bbd.js" async=""></script><script src="/webpack-runtime-f9d2245c68273fb5c452.js" async=""></script></body></html>
