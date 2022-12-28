@@ -22,13 +22,20 @@ data-styled.g4[id="Header__Logo-sc-1jtwnco-2"]{content:"dhlXMq,"}/*!sc*/
 data-styled.g5[id="Layout__Container-sc-4fi6mz-0"]{content:"eOBOLL,"}/*!sc*/
 .bPuUFC{margin:0 auto;max-width:calc(800px - 4em);padding:2em;}/*!sc*/
 data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
-</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>container의 정체와 보안</h1><div class="markdown-body"><blockquote>
-<p>컨테이너는 그냥 시야가 제한된 리눅스 프로세스이다. 커널은 이름공간, cgroups, 루트 디렉터리 변경이라는 세 가지</p>
-</blockquote>
-<p>메커니즘을 이용해서 컨테이너 프로세스들을 격리한다.</p>
-<blockquote>
-<p>둘(컨테이너와 VM)의 근본적인 차이점은, VM은 커널을 포함해 운영체제 전체의 복사본을 실행하는 반면</p>
-</blockquote>
-<p>컨테이너는 호스트 컴퓨터의 커널을 공유한다는 점이다.</p>
-<blockquote>
-</blockquote></div></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/container/security/";window.___webpackCompilationHash="4b044c6fb2b741d563f1";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-1ca6ce274660dcfdb636.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-d6e9070a07609d8dfdc4.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-6cbbba986f22fa18bd01.js"],"component---src-pages-random-jsx":["/component---src-pages-random-jsx-2a693e225b8e303f56aa.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-1ca6ce274660dcfdb636.js" async=""></script><script src="/framework-50fec33b852e34892bbd.js" async=""></script><script src="/webpack-runtime-f9d2245c68273fb5c452.js" async=""></script></body></html>
+</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>Container 격리</h1><div class="markdown-body"><h1>목차</h1>
+<ul>
+<li>주요 리눅스 메커니즘</li>
+<li>이름 공간</li>
+<li>chroot</li>
+<li>cgroups</li>
+</ul>
+<h2>주요 리눅스 메커니즘</h2>
+<p>컨테이너는 호스트와 격리된 상태로 작동한다. 컨테이너는 자신만의 네트워크 스택과파일 시스템을 갖고 있고, 사용가능한 자원도 제한되어 있다.</p>
+<p>이런 기능들은 리눅스의 메커니즘들로 이루어진다. 그것들은 이름공간, chroot, cgroups 이다.</p>
+<h2>이름공간</h2>
+<p>이름공간은 프로세스가 볼 수 있는 것들을 제한한다. 이름공간에 프로세스를 할당하면, 할당된 프로세스에서는 이름공간에서 정의된 것만을 볼 수 있게 된다.</p>
+<p>네트워크 이름공간을 이용하면 컨테이너가 볼 수 있는 네트워크 인터페이스들과 라우팅 테이블을 설정할 수 있다.</p>
+<h2>chroot</h2>
+<p>컨테이너에서 볼 수 있는 호스트의 파일 시스템 범위를 제한 할 수 있다. 리눅스의 메커니즘 중 <code>chroot</code>를 이용하면, 프로세스의 루트 디렉토리를 변경 할 수 있게 된다. 컨테이너의 루트 디렉토리를 변경해서, 그 이상을 볼 수 없게 제한 할 수 있다.</p>
+<h2>cgroups</h2>
+<p><code>cgroups</code>의 기능은 프로세스가 사용가능한 자원을 제한하는 것이다. 자원제한 규칙을 group 단위로 지정하는 것이 특징이다. 이 group에 속한 프로세스들에는 동일한 자원 제한 규칙이 적용된다.</p></div></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/container/security/";window.___webpackCompilationHash="4b044c6fb2b741d563f1";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-1ca6ce274660dcfdb636.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-d6e9070a07609d8dfdc4.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-6cbbba986f22fa18bd01.js"],"component---src-pages-random-jsx":["/component---src-pages-random-jsx-2a693e225b8e303f56aa.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-1ca6ce274660dcfdb636.js" async=""></script><script src="/framework-50fec33b852e34892bbd.js" async=""></script><script src="/webpack-runtime-f9d2245c68273fb5c452.js" async=""></script></body></html>
