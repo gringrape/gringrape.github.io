@@ -1,5 +1,5 @@
 ---
-slug    : /java/hashMap
+slug    : /java/hashmap
 title   : 자바 HashMap은 어떻게 구현되어 있을까?
 description : 
 date    : 2022-12-27 16:02:16 +0900
