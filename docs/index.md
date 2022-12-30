@@ -69,16 +69,19 @@ title: "목차"
 - [[내용 정리]]
 
 ## F-Lab
+## 2,3 주차
 - [[Java garbage collection]]
 - [[hashCode]]
 - [[상속과 조합]]
-- [[final 키워드]]
+- [[final 키워드]]]
 - [[Exception]]
+
+## 4주차
+- [[Java에서 화폐 계산은 어떻게 해야할까]]
 - [[HashMap]]
 - [[ArrayList]]
-- [[Java에서 화폐 계산은 어떻게 해야할까]]
-- [[Thread와 Process]]
-
-### 4주차
 - [[Lazy Loading]]
 - [[Red-black tree]]
+
+## 5주차
+- [[Thread와 Process]]
