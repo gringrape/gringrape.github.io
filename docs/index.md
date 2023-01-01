@@ -22,6 +22,7 @@ title: "목차"
 
 ## 알고리즘
 - [[비트연산]]
+- [[Union Find]]
 
 ## SICP Lectures
 - [[Overview and Introduction to Lisp]]
