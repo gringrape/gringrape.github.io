@@ -33,6 +33,7 @@ title: "목차"
 
 ## SICP book
 - [[Data Abstraction의 가치]]
+- [[Data 란?]]
 
 ## Java
 - [[병렬 프로그래밍]]
