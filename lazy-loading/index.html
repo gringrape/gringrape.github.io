@@ -22,45 +22,30 @@ data-styled.g4[id="Header__Logo-sc-1jtwnco-2"]{content:"dhlXMq,"}/*!sc*/
 data-styled.g5[id="Layout__Container-sc-4fi6mz-0"]{content:"eOBOLL,"}/*!sc*/
 .bPuUFC{margin:0 auto;max-width:calc(800px - 4em);padding:2em;}/*!sc*/
 data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
-</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>Lazy Loading에 대해 알아보자</h1><div class="markdown-body"><ul>
-<li>
-<p>Lazy Loading이란?</p>
-<ul>
-<li>객체가 실제로 사용될때까지 초기화를 미루는 전략.</li>
-<li>반대 개념은 eager loading이 있다.</li>
-</ul>
-</li>
-<li>
-<p>Lazy Loading의 의의</p>
-<ul>
-<li>초기화 비용이 큰 경우에 사용.</li>
-<li>초기 시작 속도를 줄이기 위해서 사용.</li>
-</ul>
-</li>
-<li>
-<p>Lazy Laoding의 예시</p>
-<ul>
-<li>예를 들어, 웹 페이지의 초기 반응 속도를 높이기 위해 이미지 등을 실제 사용시점에 로드하는 경우가 있을 수 있음.</li>
-<li>서버에서 Lazy Loading이 많이 걸려있는 경우에는 초기화를 위해 주요 URL들을 호출하는 방식 프리로딩을 하기도 함.</li>
-</ul>
-</li>
-<li>
-<p>Lazy inialization</p>
-<ul>
-<li>객체 생성을 실제로 필요할 때까지 늦추는 전략.</li>
-<li>잘 쓰이지 않는 객체, 생성 비용이 큰 객체의 경우는 전체적인 초기화 속도를 빠르게 해주는 효과가 있다.</li>
-<li>객체 생성의 임팩트를 시간상으로 넓게 분포시킨(amortized, average) 것으로 이해해도 좋다. 초기화 비용 자체가 넓은 시간 범위로 분산되기 때문에 평균적인 응답속도가 올라가는 효과가 있다.</li>
-</ul>
-</li>
-<li>
-<p>Lazy evaluation</p>
-<ul>
-<li>표현이 실제로 사용될때까지 평가를 늦추는 전략.</li>
-<li>실제로 무한 길이의 선형 데이터 구조를 가능하게 해준다.</li>
-<li>몇개의 데이터에 오류가 있는 경우에도 전체 구조를 허용하게 해준다.</li>
-</ul>
-</li>
-</ul>
+</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>Lazy Loading에 대해 알아보자</h1><div class="markdown-body"><h2>Lazy Loading이란?</h2>
+<p>자원의 로딩을 실제로 자원이 필요한 지점까지 늦추는 전략이다. 비동기적 로딩(asynchronous loading)이라고도 불린다.</p>
+<h3>Lazy Loading의 의의</h3>
+<p>웹페이지에서 이미지 로딩을 처리하는데에 활용된다. 초기에 모든 이미지를 로드하지 않으므로 처음 응답속도가 개선되는 효과가 있다. 자원의 초기화를 필요시점까지 늦춰서 초기 속도를 개선시킨다는 아이디어는 매우 보편적인 것으로 다양한 영역에서 활용된다.</p>
+<h2>Lazy initialization</h2>
+<p>객체 초기화를 이와 같이 지연방식으로 해놓으면, 특정 경로를 테스트 하는 경우와 같이 모든 객체를 사용하지 않을때 초기화 비용이 사라져 속도가 향상 된다. 반면에, 지연 초기화가 기본으로 설정되어 있는 경우에는 초기화 비용을 미리 지불해서 응답속도를 높이기 위해 서버 시작시에 여러 경로에 대한 요청을 해서 프리 로딩을 하는 경우도 있다.</p>
+<h2>Lazy evaluation</h2>
+<p>표현이 실제로 사용될때까지 평가를 늦추는 전략이다. 지연 평가를 지원한 언어의 경우, 다음과 같은 표현이 주어진다면 해당 경로의 값만 평가한다.</p>
+<pre><code>ifThenElse True b c = b
+ifThenElse False b c = c
+</code></pre>
+<p>지연 평가는 개념적으로 무한 개수의 데이터 구조를 다룰 수 있게 해준다는 장점도 있다. Java에서는 지연평가를 지원하는 Stream을 활용해서 무한 Stream을 표현할 수 있다.</p>
+<pre><code class="language-java">// given
+Stream&#x3C;Integer> infiniteStream = Stream.iterate(0, i -> i + 2);
+
+// when
+List&#x3C;Integer> collect = infiniteStream
+  .limit(10)
+  .collect(Collectors.toList());
+
+// then
+assertEquals(collect, Arrays.asList(0, 2, 4, 6, 8, 10, 12, 14, 16, 18));
+</code></pre>
+<p>지연 평가를 지원하는 데이터 구조의 경우에 결과를 얻기위한 종결연산이 존재하며, 종결연산이 실행되는 시점에서야 값에 대한 평가가 이루어진다.</p>
 <h2>참고</h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Lazy_loading">https://en.wikipedia.org/wiki/Lazy_loading</a></li>
