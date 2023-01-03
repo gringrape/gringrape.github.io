@@ -22,25 +22,14 @@ data-styled.g4[id="Header__Logo-sc-1jtwnco-2"]{content:"dhlXMq,"}/*!sc*/
 data-styled.g5[id="Layout__Container-sc-4fi6mz-0"]{content:"eOBOLL,"}/*!sc*/
 .bPuUFC{margin:0 auto;max-width:calc(800px - 4em);padding:2em;}/*!sc*/
 data-styled.g6[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
-</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>Thread와 Process의 차이</h1><div class="markdown-body"><ul>
-<li>
-<p>Thread를 사용하는 이유</p>
-<ul>
-<li>하나의 프로세스에서 여러개의 프로세서를 동시에 활용할수 있도록 하기 위해서. (병렬 실행해주기 위해서)</li>
-<li>프로세스의 작업들 중 I/O와 같은 blocking 작업을 다른 작업과 함께 실행해주기 위해서.</li>
-<li>작업들을 각각 독립적인 스레드에 할당하는 경우, I/O가 일어나는 작업들을 다른 작업들을 overlap 시키는 것이 가능해진다.</li>
-<li>병렬실행은 스레드를 이용하는 것 이외에 이벤트 기반으로 하는 방법도 있다.</li>
-</ul>
-</li>
-<li>
-<p>Thread와 Process의 차이</p>
-<ul>
-<li>Thread는 경량 프로세스라고 불릴 정도로 유사점이 많음.</li>
-<li>첫번째 차이점은 context swithching이 일어날때, Thread의 경우 address space가 바뀌지 않는 다는 점이다.</li>
-<li>두번째는 multi thread의 프로세스는 thread 마다 별도의 스택을 가진다는 점이다.</li>
-</ul>
-</li>
-</ul>
+</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 jNZVXs"><div class="Header__Contents-sc-1jtwnco-1 eEvqcP"><div class="Header__Logo-sc-1jtwnco-2 dhlXMq">💎 Jin</div><nav class="Navigation__Container-sc-1o4eyqf-0 jPjBye"><ul><li><a href="/random">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>Thread와 Process의 차이</h1><div class="markdown-body"><h2>스레드를 사용하는 이유</h2>
+<p>스레드는 동시에 여러개의 작업을 실행하기 위해 고안된 것이다. 스레드마다 Program Counter를 가지고 있으며, 별도의 스택에서 동작한다. 경량 프로세스라고 불릴 정도로 프로세스와 유사하다. 본질적인 차이는 스레드끼리는 메모리의 주소 공간을 공유한다는 것이다.</p>
+<p>스레드는 작업을 병렬적으로 실행할 수 있게 해준다. 싱글 코어일 경우에는 프로세스 보다 가볍게 컨텍스트 스위칭으로 동작하고, 멀티 코어일 경우에 멀티스레드를 이용하면 여러 작업이 동시에 병렬적으로 실행되게 된다.</p>
+<p>특히, I/O와 같이 blocking이 발생하는 작업을 하는데 유리하다. blocking이 발생하는 작업을 하나의 스레드에서 수행하고, 다른 스레드에서 필요한 작업을 하게 한다면 두 작업을 overlap 해주는 효과가 있게 된다.</p>
+<h2>동시성 문제</h2>
+<p>주소 공간을 공유하여 프로세스보다 가볍게 사용할 수 있다는 장점은 동시성 문제를 발생시키는 원인이 된다. 가변적이고 공유된 메모리 공간에, 한번에 여러개의 스레드에서 접근해 변경하는 상황이 되면 동시성 문제에 노출되게 된다.</p>
+<p>대표적으로 문제가 일어나는 연산의 종류가 'Read and write' 연산으로 'Read'와 'Write'라는 두 연산이 하나로 움직이지 않는 것이 문제이다. 하나의 스레드에서 Read를 수행한 후에 Write를 하는 동안, 다른 스레드에서 Read를 수행하고 같은 값으로 업데이트 하는 경우가 발생할 수 있다.</p>
+<p>동시성 문제에서는 주로 가시성과 연산의 원자성이 문제가 된다. 이를 해소하기 위한 방법으로 스레드의 배타적 접근을 보장하는 락 계열이나 락을 사용하지 않는 Non-blocking synchronization 방법들이 있다.</p>
 <h2>참고</h2>
 <ul>
 <li>Operating Systems: Three Easy Pieces, Chapter 26 Concurrency, Chapter 33 Event based concurrency</li>
