@@ -38,6 +38,7 @@ title: "목차"
 ## Java
 - [[병렬 프로그래밍]]
 - [[병렬 프로그래밍- 객체 공유]]
+- [[synchronizers]]
 
 ## Clean Code
 - [[Args 예제]]
