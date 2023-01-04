@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import useRandomPath from '../hooks/useRandomPath';
 
 const Container = styled.nav`
-  font-size: 1.5em;
-  font-weight: bold;
+  font-size: 1.3em;
 
   li {
     list-style: none;

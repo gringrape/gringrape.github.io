@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import dateComparators from '../dateComparators';
 
+import formatDate from '../formatDate';
+
 const Container = styled.ul`
   display: flex;
   flex-direction: column;
@@ -12,23 +14,32 @@ const Container = styled.ul`
 `;
 
 const Item = styled.li`
-  font-size: 1.5em;
-  padding-block: 1em;
-  padding-inline: 2em;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  padding-top: 1em;
+  padding-bottom: 1.3em;
   width: 100%;
+  border-top: 1px solid rgba( 0, 0, 4, .125 );
 
   h3 {
     margin-block: 0.5em;
   }
 
   a {
-    color: #1756a9;
+    color: #3d4449;
     text-decoration: none;
   }
 `;
 
 const Description = styled.div`
   font-size: .7em;
+`;
+
+const Date = styled.div`
+  color: rgba( 0, 0, 4, 0.4 );
 `;
 
 export default function Posts({ posts }) {
@@ -38,14 +49,19 @@ export default function Posts({ posts }) {
         dateComparators.compareInAscendingOrder(a.date, b.date)
       )).map((post) => (
         <Item key={post.id}>
-          <h3>
-            <a href={post.path}>
-              {post.title}
-            </a>
-          </h3>
-          <Description>
-            {post.description}
-          </Description>
+          <div>
+            <h3>
+              <a href={post.path}>
+                {post.title}
+              </a>
+            </h3>
+            <Description>
+              {post.description}
+            </Description>
+          </div>
+          <Date>
+            {formatDate(post.date)}
+          </Date>
         </Item>
       ))}
     </Container>
