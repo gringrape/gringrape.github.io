@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
+import './layout.css';
+
 import Header from './Header';
+import Footer from './Footer';
 
 const Container = styled.div`
   font-size: 16px;
@@ -19,6 +22,7 @@ export default function Layout({ children }) {
       <Main>
         {children}
       </Main>
+      <Footer />
     </Container>
   );
 }
