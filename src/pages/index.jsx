@@ -9,10 +9,11 @@ const Container = styled.div``;
 
 function IndexPage() {
   const posts = usePosts();
+  const paths = posts.map(({ path }) => path);
 
   return (
     <Container>
-      <Layout>
+      <Layout paths={paths}>
         <Posts posts={posts} />
       </Layout>
     </Container>
