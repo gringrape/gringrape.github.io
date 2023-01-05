@@ -32,3 +32,5 @@ export const PostQuery = graphql`
     }
   }
 `;
+
+export { Head } from './index';
