@@ -2,7 +2,7 @@ module.exports = {
   jsxRuntime: 'automatic',
   siteMetadata: {
     title: 'Jin\'s log',
-    siteUrl: 'https://www.yourdomain.tld',
+    siteUrl: 'https://gringrape.github.io/',
   },
   plugins: ['gatsby-plugin-styled-components', 'gatsby-plugin-mdx', {
     resolve: 'gatsby-source-filesystem',

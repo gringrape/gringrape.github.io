@@ -21,3 +21,9 @@ function IndexPage() {
 }
 
 export default IndexPage;
+
+export function Head() {
+  return (
+    <title>Jin wiki</title>
+  );
+}
