@@ -100,3 +100,4 @@ title: "목차"
 - [[Thread와 Process]]
 - [[volatile 키워드]]
 - [[CAS 알고리즘]]
+- [[객체 직렬화]]
