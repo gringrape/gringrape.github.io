@@ -73,6 +73,14 @@ class Counter {
 ```
 값 업데이트에 실패한 스레드는 락 획득에 실패한 스레드와 같이 배제(blocking)되거나 락을 재획득할때까지대기(suspend)하지 않는다. 다시 시도할 수 있고, 다른 작업을 할 수 도 있다. 코드 예시와 같은 경우는 값을 다시 읽어와서 다시 업데이트를 시도하는 것을 볼 수 있다.  
 
+## Java - AtomicInteger
+원자적인 업데이트를 지원하는 클래스이다. 주요 인터페이스 중에서 `compareAndSet`을 살펴보면 CAS 알고리즘을 사용하는 것을 알 수 있다. 유사한 클래스들을 `java.util.concurrent.atomic` 패키지에서 찾아볼 수 있다.
+
+> compareAndSet(int expect, int update)
+> Atomically sets the value to the given updated value if the current value == the expected value.
+
+
 ## 출처
 - Java Concurrency In Practice, Brian Goetz
 - https://howtodoinjava.com/java/multi-threading/compare-and-swap-cas-algorithm/
+- AtomicInteger - https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/AtomicInteger.html#weakCompareAndSet-int-int-
