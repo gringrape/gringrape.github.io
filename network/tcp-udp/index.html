@@ -25,33 +25,28 @@ data-styled.g5[id="Footer__Container-sc-vy4wu9-0"]{content:"cvEuAs,"}/*!sc*/
 data-styled.g6[id="Layout__Container-sc-4fi6mz-0"]{content:"eOBOLL,"}/*!sc*/
 .bPuUFC{margin:0 auto;max-width:calc(800px - 4em);padding:2em;}/*!sc*/
 data-styled.g7[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
-</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 kdgwbZ"><div class="Header__Contents-sc-1jtwnco-1 djotJN"><div class="Header__Logo-sc-1jtwnco-2 eJtfQW">Jin<!-- --><p>developer &amp; writer</p></div><nav class="Navigation__Container-sc-1o4eyqf-0 gocqwW"><ul><li><a href="/java/parallel/object">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>union find 알고리즘에 대해 알아보자</h1><div class="markdown-body"><h2>풀고자 하는 문제</h2>
-<p>두개의 대상이 서로 같은 집합에 속하는지 빠르게 판단하고 싶은 경우에 사용한다. 그래프에서 두 노드 사이에 연결이 존재하는지를 판단할때 활용한다.</p>
-<h2>자료구조의 인터페이스</h2>
-<p><code>union(a:Node, b:Node)</code>과 <code>isConnected(a: Node, b: Node)</code>를 public method로 설계할 수 있다.</p>
+</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 kdgwbZ"><div class="Header__Contents-sc-1jtwnco-1 djotJN"><div class="Header__Logo-sc-1jtwnco-2 eJtfQW">Jin<!-- --><p>developer &amp; writer</p></div><nav class="Navigation__Container-sc-1o4eyqf-0 gocqwW"><ul><li><a href="/java/hashmap">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>TCP와 UDP</h1><div class="markdown-body"><h2>규약에 대해서 먼저 생각해보자</h2>
+<p>내가 알고 있는 protocol의 의미는 set of rules이다. 통신 규약이라면 통신을 하는데 필요한 약속들의 모음집이다. 여러가지 규약들이 존재하고 규약마다 이름이 붙어있다. 이걸 보면 법 조항의 이름을 떠올리게 된다. 장애인 차별 금지법, 이것은 장애인 차별을 막기 위한 목적으로 제정된 일련의 법조항들의 묶음일 것이다.</p>
+<p>즉, 규약마다 규칙들을 묶어주는 경계와 목적이 존재할 것 같다. 그 중에서도 목적에 집중하려고 한다. 그것이 가장 핵심적인 가치이고, 다른 것들을 설명하는 기준이 되기 때문이다.</p>
+<h2>UDP의 목적</h2>
+<p>RFC 768의 원문은 이렇다.</p>
 <blockquote>
-<ul>
-<li>union(a, b) 는 두 지점을 연결시키는 메서드이다.</li>
-<li>isConnected(a, b) 는 두 지점이 연결되어 있는지 (같은 connected component에 속하는지) 여부를 반환한다.</li>
-</ul>
+<p>This protocol  provides  a procedure  for application  programs  to send</p>
 </blockquote>
-<h2>알고리즘</h2>
-<h3>Quick find</h3>
-<p>이름처럼 <code>isConnected</code> 연산의 시간복잡도가 <code>O(1)</code>으로 빠른 연산이다. 대신에 <code>union</code> 연산의 시간복잡도가 높다. 구체적인 사항은 다음과 같다.</p>
+<p>messages  to other programs  with a minimum  of protocol mechanism.  The
+protocol  is transaction oriented, and delivery and duplicate protection
+are not guaranteed.</p>
+<p>목적 자체의 방점은 최소한의 전송 메커니즘을 활용해서 전달하겠다는 것이다. 배달사고나 중복에 대해서는 책임지지 않는다는 것이다. 이것을 <code>transaction oriented</code>protocol 이라는 이름으로 부르고 있다.</p>
+<h2>TCP</h2>
+<p>TCP의 표준도 찾아보자.</p>
 <blockquote>
-<ul>
-<li>노드 수 만큼의 배열을 준비한다.</li>
-<li>대표 아이디 배열을 초기화 한다. 인덱스가 노드 번호이고 값은 노드가 속한 component의 대표 아이디이다.</li>
-<li>isConnected 연산에서는 두개의 노드가 서로 같은 대표 아이디를 가졌는지 확인하면 된다> - union 연산의 경우, 두 인덱스의 값을 하나로 통일시켜주고, 두 노드가 속한 컴포넌트 값을 가진 인덱스들을 모두가 같은 값으로 만들어야 한다.</li>
-</ul>
+<p>The Transmission Control Protocol (TCP) is intended for use as a highly</p>
 </blockquote>
-<h2>Quick union</h2>
-<p><code>union</code>연산의 시간복잡도를 낮추고 <code>isConnected</code> 연산의 시간복잡도를 늘린 경우이다.</p>
-<blockquote>
+<p>reliable host-to-host protocol between hosts in packet-switched computer
+communication networks, and in interconnected systems of such networks.</p>
+<p>이미 알고 있는 대로, 신뢰할 수 있는 연결을 목적으로 하는 프로토콜임을 알 수 있다. Motivation에서는 <code>connection oriented</code>라는 단어로 정리하고 있다.</p>
+<h2>참고</h2>
 <ul>
-<li><code>isConnected</code> 연산의 경우 두 노드의 루트가 같은지를 검사한다.</li>
-<li><code>union</code> 연산은 두개의 값을 둘 중 하나로 통일 시키면 된다.</li>
-</ul>
-</blockquote>
-<h2>Quick union weighted</h2>
-<p>불행히도 위 두 알고리즘 모두 느리다. 가중치를 주는 방식을 통해서 빠른 알고리즘으로 변화시킬 수 있다. 가중치는 해당 컴포넌트에 속하는 노드의 개수로, 원소의 개수가 작은 쪽이 더아래로 가레된다.</p></div></div><div class="Footer__Container-sc-vy4wu9-0 cvEuAs">©2023 Jin Kim</div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/algorithm/union-find/";window.___webpackCompilationHash="bb332ad23f2f3ed005b9";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-1123a7f70b85584b53bb.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-5d623c46593b707c9dc8.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-41112d9f82de1ed2e89e.js"],"component---src-pages-random-jsx":["/component---src-pages-random-jsx-2a693e225b8e303f56aa.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-1123a7f70b85584b53bb.js" async=""></script><script src="/framework-50fec33b852e34892bbd.js" async=""></script><script src="/webpack-runtime-3fcf005f2d2c0a8c6c2a.js" async=""></script></body></html>
+<li>RFC 768, UDP - <a href="https://www.rfc-editor.org/rfc/rfc768">https://www.rfc-editor.org/rfc/rfc768</a></li>
+<li>RFC 793, TCP - <a href="https://www.ietf.org/rfc/rfc793.txt">https://www.ietf.org/rfc/rfc793.txt</a></li>
+</ul></div></div><div class="Footer__Container-sc-vy4wu9-0 cvEuAs">©2023 Jin Kim</div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/network/tcp-udp/";window.___webpackCompilationHash="bb332ad23f2f3ed005b9";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-1123a7f70b85584b53bb.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-5d623c46593b707c9dc8.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-41112d9f82de1ed2e89e.js"],"component---src-pages-random-jsx":["/component---src-pages-random-jsx-2a693e225b8e303f56aa.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-1123a7f70b85584b53bb.js" async=""></script><script src="/framework-50fec33b852e34892bbd.js" async=""></script><script src="/webpack-runtime-3fcf005f2d2c0a8c6c2a.js" async=""></script></body></html>
