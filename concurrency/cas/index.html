@@ -25,7 +25,7 @@ data-styled.g5[id="Footer__Container-sc-vy4wu9-0"]{content:"cvEuAs,"}/*!sc*/
 data-styled.g6[id="Layout__Container-sc-4fi6mz-0"]{content:"eOBOLL,"}/*!sc*/
 .bPuUFC{margin:0 auto;max-width:calc(800px - 4em);padding:2em;}/*!sc*/
 data-styled.g7[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
-</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 kdgwbZ"><div class="Header__Contents-sc-1jtwnco-1 djotJN"><div class="Header__Logo-sc-1jtwnco-2 eJtfQW">Jin<!-- --><p>developer &amp; writer</p></div><nav class="Navigation__Container-sc-1o4eyqf-0 gocqwW"><ul><li><a href="/java/hashcode">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>Compare and swap 알고리즘</h1><div class="markdown-body"><h2>Non blocking synchronization의 필요성</h2>
+</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 kdgwbZ"><div class="Header__Contents-sc-1jtwnco-1 djotJN"><div class="Header__Logo-sc-1jtwnco-2 eJtfQW">Jin<!-- --><p>developer &amp; writer</p></div><nav class="Navigation__Container-sc-1o4eyqf-0 gocqwW"><ul><li><a href="/clean-code/args-example">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>Compare and swap 알고리즘</h1><div class="markdown-body"><h2>Non blocking synchronization의 필요성</h2>
 <h2>락의 기본개념</h2>
 <p>락으로 보호하는 객체에 대한 접근을 한번에 하나의 스레드로 제한하는 것. 락을 획득하여 수행한 모든 결과가 이후에 동일한 락을 얻은 스레드에 코드에 의도된 순서대로 보이는 기능이 있다.</p>
 <h2>락 방식의 단점</h2>
@@ -61,7 +61,8 @@ data-styled.g7[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
 </code></pre>
 <p>락을 사용하면 count 연산의 원자성이 확보가 되어서 동시성 문제가 해결된다. 하지만 활동성 장애와 퍼포먼스의 문제가 발생할 수 있다.</p>
 <h3>낙관적 제어</h3>
-<p>CAS를 이용해서 낙관적인 방식으로 진행할 수도 있다. 일단 모든 스레드에 접근을 허용한다. 그리고 CAS연산을 하면서 바꾸려는 값이 올바른지를 한번더 확인한다. 코드는 다음과 같다.</p>
+<p>CAS를 이용해서 낙관적인 방식으로 진행할 수도 있다. 낙관적 제어의 핵심은 접근은 허용하되 문제가 생길경우 작업을 취소하는 <code>error detection</code>을 갖추고 있는 것이다. CAS 알고리즘의 경우 비교(compare)하는 대상과 같을 경우에만 작업(swap)이 이루어지고, 그렇지 않은 경우 실패한다. 비교 연산이 <code>error detection</code> 역할을 한다.</p>
+<p>구체적 적용 코드는 다음과 같다.</p>
 <pre><code class="language-java">class Counter {
   private CAS count;
   
