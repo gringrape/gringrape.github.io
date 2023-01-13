@@ -25,12 +25,45 @@ data-styled.g5[id="Footer__Container-sc-vy4wu9-0"]{content:"cvEuAs,"}/*!sc*/
 data-styled.g6[id="Layout__Container-sc-4fi6mz-0"]{content:"eOBOLL,"}/*!sc*/
 .bPuUFC{margin:0 auto;max-width:calc(800px - 4em);padding:2em;}/*!sc*/
 data-styled.g7[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
-</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 kdgwbZ"><div class="Header__Contents-sc-1jtwnco-1 djotJN"><div class="Header__Logo-sc-1jtwnco-2 eJtfQW">Jin<!-- --><p>developer &amp; writer</p></div><nav class="Navigation__Container-sc-1o4eyqf-0 gocqwW"><ul><li><a href="/thread-process">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>Java의 ArrayList</h1><div class="markdown-body"><ul>
-<li>Resizable Array 를 통해서 List 인터페이스를 구현한 구현체.</li>
-<li>capacity를 지정할 수 있음.</li>
-<li>대량의 데이터를 넣는 경우에 미리 공간을 <code>ensureCapacity</code>를 통해서 공간확보를 할 수 있음. 이를 통해서 점진적인 공간확보와 복사에 걸리는 연산을 단축시킬 수 있음.</li>
-<li><code>add</code> 연산의 경우 시간 복잡도가 amortized constant. Resizing을 하면서 걸리는 시간을 포함해서 평균적인 시간복잡도가 상수인 것을 의미.</li>
-</ul>
+</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 kdgwbZ"><div class="Header__Contents-sc-1jtwnco-1 djotJN"><div class="Header__Logo-sc-1jtwnco-2 eJtfQW">Jin<!-- --><p>developer &amp; writer</p></div><nav class="Navigation__Container-sc-1o4eyqf-0 gocqwW"><ul><li><a href="/ctci/1-1">random</a></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>Java의 ArrayList</h1><div class="markdown-body"><h2>Amortized constant 시간복잡도</h2>
+<h3>상세한 스펙 이야기</h3>
+<p><code>ArrayList</code>는 내부적으로 배열을 이용해 구현된다. 원소가 배열에 차게 되면 배열의 크기를 늘린 새로운 배열을 생성하게 되고, 이 배열에 원소를 복사하는 방식으로 용량을 확장하게 된다.</p>
+<p>구현체를 참고해보자. OpenJDK 19 기준이다.</p>
+<pre><code class="language-java">public void add(int index, E element) {
+    rangeCheckForAdd(index);
+    modCount++;
+    final int s;
+    Object[] elementData;
+    if ((s = size) == (elementData = this.elementData).length)
+        elementData = grow();
+    System.arraycopy(elementData, index,
+                     elementData, index + 1,
+                     s - index);
+    elementData[index] = element;
+    size = s + 1;
+}
+
+</code></pre>
+<p>내부적으로 <code>elementData</code>를 저장용 배열로 사용하고 있으며, 크기는 <code>size</code>로 따로 추적하고 있다.</p>
+<p>핵심은 크기 증가 로직이다. <code>elementData</code>가 가득찬 경우 새로운 배열을 생성해서 대입해주고 있다. <code>grow</code> 메서드에서 핵심적인 것은 새롭게 생성할 배열의 크기를 결정하는 부분이다.</p>
+<pre><code class="language-java">private Object[] grow(int minCapacity) {
+    int oldCapacity = elementData.length;
+    if (oldCapacity > 0 || elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
+        int newCapacity = ArraysSupport.newLength(oldCapacity,
+                minCapacity - oldCapacity, /* minimum growth */
+                oldCapacity >> 1           /* preferred growth */);
+        return elementData = Arrays.copyOf(elementData, newCapacity);
+    } else {
+        return elementData = new Object[Math.max(DEFAULT_CAPACITY, minCapacity)];
+    }
+}
+</code></pre>
+<p>새로운 원소를 넣기 위해 증가시켜야할 크기와 기존 크기의 두배 크기를 고려하여 새로운 크기를 설정하고 있다. 새로운 크기의 배열을 만들고 그 곳에 기존 원소를 모두 복사하고 있다.</p>
+<h3>amortized constant 의 의미</h3>
+<p>lazy initialization의 전략과 유사하다. 불필요한 초기화 보다 초기화 비용을 시간에 따라 분배하는 정책을 취한다. 쉽게 이야기하는 경우에는 필요할때 만든다라고 할 수 있겠다.</p>
+<p>배열 크기를 증가 시킬때는 새로운 배열의 생성 및 원소 복사라는 큰 비용이 발생하지만, 크기 증가 연산은 원소가 가득 찼을 경우에만 일어나는 것이다. 따라서, 원소 개수로 비용을 나누어 보면 평균적으로 시간복잡도는 데이터 개수와 비례하지 않는 O(1) 임을 알 수 있다.</p>
+<h3>추가적인 최적화</h3>
+<p>필요한 원소의 개수가 많고, 확정적인 경우라면 굳이 단계적으로 크기를 늘려나갈 필요가 없다. 이 경우에 사용하기 위해서, <code>ensureCapacity</code>라는 메서드를 스펙에서 규정하고 있다.</p>
 <h2>참고</h2>
 <ul>
 <li>ArrayList Specification - <a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/ArrayList.html">https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/ArrayList.html</a></li>
