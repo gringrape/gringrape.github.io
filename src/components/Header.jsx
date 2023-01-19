@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Navigation from './Navigation';
 
 const Container = styled.header`
-  margin-inline: calc((100vw - 100%) / 2);
+  margin-inline: calc((100% - 100vw) / 2);
   background: #F5F6F7;
 `;
 
