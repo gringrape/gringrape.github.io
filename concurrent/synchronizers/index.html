@@ -25,11 +25,19 @@ data-styled.g5[id="Footer__Container-sc-vy4wu9-0"]{content:"cvEuAs,"}/*!sc*/
 data-styled.g6[id="Layout__Container-sc-4fi6mz-0"]{content:"eOBOLL,"}/*!sc*/
 .bPuUFC{margin:0 auto;max-width:calc(800px - 4em);padding:2em;}/*!sc*/
 data-styled.g7[id="Layout__Main-sc-4fi6mz-1"]{content:"bPuUFC,"}/*!sc*/
-</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 kdgwbZ"><div class="Header__Contents-sc-1jtwnco-1 djotJN"><div class="Header__Logo-sc-1jtwnco-2 eJtfQW">Jin<!-- --><p>developer &amp; writer</p></div><nav class="Navigation__Container-sc-1o4eyqf-0 dhAxnD"><ul><li><button type="button" role="link">random</button></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>Synchronizers</h1><div class="markdown-body"><ul>
-<li>syncrhonize의 넓은 의미</li>
-<li>synchronization을 위한 상태</li>
-<li>synchronizer로서의 mutex</li>
-<li>latch와 활용 - event</li>
-<li>semaphore - number of thread, bound</li>
-<li>barrier - other thread</li>
+</style></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><div class="Layout__Container-sc-4fi6mz-0 eOBOLL"><header class="Header__Container-sc-1jtwnco-0 kdgwbZ"><div class="Header__Contents-sc-1jtwnco-1 djotJN"><div class="Header__Logo-sc-1jtwnco-2 eJtfQW">Jin<!-- --><p>developer &amp; writer</p></div><nav class="Navigation__Container-sc-1o4eyqf-0 dhAxnD"><ul><li><button type="button" role="link">random</button></li></ul></nav></div></header><div class="Layout__Main-sc-4fi6mz-1 bPuUFC"><h1>동시성 관리 - Synchronizer</h1><div class="markdown-body"><h2>Synchronizer란?</h2>
+<blockquote>
+<p>A synchronizer is any object that can control the flow of threads based on its state.</p>
+</blockquote>
+<p>추상적으로 정의하면, 핵심은 어떤 상태가 있고 그 상태에 따라서 쓰레드의 흐름을 컨트롤 하는 객체라는 것.</p>
+<blockquote>
+<p>All synchronizers share certain structural properties: they encapsulate state that determines whether threads arriving at the synchronizer should be allowed to pass or forced to wait, provides method manipulate state.</p>
+</blockquote>
+<p>상태는 캡슐화 되어서 외부에서 조작할 수 있는 퍼블릭 메서드를 제공한다. 예를 들어, 댐과 같은 걸 상상하면 되겠다. 물을 쓰레드에 비유할 수 있고, 댐 수문의 높이(상태)를 조절해서 유량을 조절하는 것을 상상해 볼 수 있다.</p>
+<h2>Synchronizer의 예시</h2>
+<p>수기신호라는 의미를 갖는 <code>Semaphore</code>가 있다. 자원에 접근 가능한 쓰레드 개수를 미리 할당해놓고, 할당량이 가득차면 더 이상 접근하지 못하도록 통제하는 방식이다. JDBC 커넥션 풀과 같은 것이 대표적인 예시이다.</p>
+<p>이 밖에도 <code>Latch</code>, <code>Barries</code> 유형이 있다.</p>
+<h2>참고</h2>
+<ul>
+<li>Chapter 5.5, Java Concurrency in Practice 1st Edition by Brian Goetz</li>
 </ul></div></div><div class="Footer__Container-sc-vy4wu9-0 cvEuAs">©2023 Jin Kim</div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/concurrent/synchronizers/";window.___webpackCompilationHash="1d0581d686a58d0a3ca7";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-58ec4239f6eacaca7640.js"],"app":["/app-ff06efff3ae08d8ded7d.js"],"component---src-pages-404-jsx":["/component---src-pages-404-jsx-7fe0b42a086f3074995c.js"],"component---src-pages-index-jsx":["/component---src-pages-index-jsx-e0f28de14eb626a2d957.js"],"component---src-pages-markdown-remark-frontmatter-slug-jsx":["/component---src-pages-markdown-remark-frontmatter-slug-jsx-722884edcb23eafb62bf.js"]};/*]]>*/</script><script src="/polyfill-58ec4239f6eacaca7640.js" nomodule=""></script><script src="/app-ff06efff3ae08d8ded7d.js" async=""></script><script src="/framework-98507b0e60239b31f3fb.js" async=""></script><script src="/webpack-runtime-5729ddcf1c37ead7fa31.js" async=""></script></body></html>
