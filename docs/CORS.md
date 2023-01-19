@@ -20,6 +20,9 @@ preflight-request의 구성을 살펴보면 좋다.
 https://github.com/aosabook/500lines/tree/master/same-origin-policy
 책은 `500 lines or less`
 
+## 예시
+정적 컨텐츠를 제공하는 서버에서 이미지를 가져오는 경우에 이런 문제가 많이 발생한다. Amazon S3와 같은 서비스를 이용한다면 CORS를 위한 설정이 필요하다. 
+
 ## 참고
 - OPTION method - https://www.rfc-editor.org/rfc/rfc2616#section-9.2
 - https://github.com/aosabook/500lines/tree/master/same-origin-policy
