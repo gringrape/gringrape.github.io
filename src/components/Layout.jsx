@@ -7,11 +7,11 @@ import Footer from './Footer';
 
 const Container = styled.div`
   font-size: 16px;
+  margin: 0 auto;
+  max-width: calc(800px - 4em);
 `;
 
 const Main = styled.div`
-  margin: 0 auto;
-  max-width: calc(800px - 4em);
   padding: 2em;
 `;
 
