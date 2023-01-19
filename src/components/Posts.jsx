@@ -18,6 +18,7 @@ const Item = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: .5em;
   margin-bottom: 1em;
   padding-top: 1em;
   padding-bottom: 1.3em;
@@ -31,6 +32,11 @@ const Item = styled.li`
   a {
     color: #3d4449;
     text-decoration: none;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
   }
 `;
 

@@ -5,5 +5,5 @@ const localizedFormat = require('dayjs/plugin/localizedFormat');
 dayjs.extend(localizedFormat);
 
 export default function formatDate(string) {
-  return dayjs(string).format('LL');
+  return dayjs(string.replaceAll('-', '/')).format('LL');
 }
