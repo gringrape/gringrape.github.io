@@ -27,3 +27,7 @@ date    : 2022-10-15 00:10:32 +0900
 ## cgroups
 `cgroups`의 기능은 프로세스가 사용가능한 자원을 제한하는 것이다. 자원제한 규칙을 group 단위로 지정하는 것이 특징이다. 이 group에 속한 프로세스들에는 동일한 자원 제한 규칙이 적용된다. 
 
+## 실습 참고
+- Containers from scratch, Liz Rice - https://www.youtube.com/watch?v=8fi7uSYlOdc
+- Containers from scratch, GitHub repository - https://github.com/lizrice/containers-from-scratch
+
