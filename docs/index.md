@@ -43,6 +43,7 @@ title: "목차"
 - [[병렬 프로그래밍- 객체 공유]]
 - [[락 기반 병렬성 제어 방법들]]
 - [[synchronizers]]
+- [[JDBC]]
 
 ## Clean Code
 - [[Args 예제]]
@@ -64,6 +65,7 @@ title: "목차"
 - [[VPN]]
 - [[CORS]]
 - [[Load Balancing]]
+- [[쿠키]]
 
 ## 코딩인터뷰 완전분석
 ### 배열과 문자열
