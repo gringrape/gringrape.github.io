@@ -31,3 +31,5 @@ date    : 2022-10-15 00:10:32 +0900
 - Containers from scratch, Liz Rice - https://www.youtube.com/watch?v=8fi7uSYlOdc
 - Containers from scratch, GitHub repository - https://github.com/lizrice/containers-from-scratch
 
+## 실습
+- https://github.com/gringrape/coding-life/pull/20
