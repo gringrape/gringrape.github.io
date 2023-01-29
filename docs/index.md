@@ -56,6 +56,7 @@ title: "목차"
 ## 운영체제
 - [[운영체제가 하는 일]]
 - [[Limited Direct Execution]]
+- [[Address space]]
 
 ## 데이터베이스
 - [[인덱스]]
